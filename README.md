@@ -13,7 +13,7 @@ The objective of this lab is to gain practical, hands-on experience with enterpr
 
  ``` mermaid
 graph TD
-    %% Define Styles
+    %% Styles
     classDef host fill:#2d3748,stroke:#1a202c,stroke-width:2px,color:#fff;
     classDef hyper fill:#4a5568,stroke:#2d3748,stroke-width:2px,color:#fff;
     classDef endpoint fill:#3182ce,stroke:#2b6cb0,stroke-width:2px,color:#fff;
@@ -21,40 +21,71 @@ graph TD
     classDef identity fill:#dd6b20,stroke:#c05621,stroke-width:2px,color:#fff;
     classDef soc fill:#319795,stroke:#2c7a7b,stroke-width:2px,color:#fff;
 
-    %% Nodes
     A[💻 MacBook Air Host]:::host
     B[⚙️ UTM Hypervisor]:::hyper
-    C[🖥️ Windows 11 Enterprise VMs]:::endpoint
-    D[🛡️ Microsoft Defender for Endpoint]:::security
-    E[☁️ Microsoft Defender XDR Portal]:::security
+    C1[🖥️ HR-LAPTOP-01]:::endpoint
+    C2[🖥️ SALES-LAPTOP-01]:::endpoint
+    D[🛡️ Microsoft Defender for Endpoint Sensor]:::security
+    E[☁️ Microsoft Defender XDR]:::security
     F[🆔 Microsoft Entra ID]:::identity
     G[🔍 SOC Analyst Investigation]:::soc
 
-    %% Flow/Connections
     A --> B
-    B --> C
-    C --> D
+    B --> C1
+    B --> C2
+    C1 --> D
+    C2 --> D
     D --> E
     F --> E
     E --> G
 
-    %% Environments
-    subgraph Local Environment
-    A
-    B
-    C
+    subgraph Local_Lab["Local Lab Environment"]
+        A
+        B
+        C1
+        C2
     end
 
-    subgraph Microsoft 365 Cloud Enterprise Tenant
-    D
-    E
-    F
+    subgraph Microsoft_Cloud["Microsoft Security Cloud"]
+        E
+        F
     end
 
 
- ``` 
+ ```
 
 
+## 📂 Repository Structure
+
+```text
+Enterprise-Microsoft-Defender-XDR-Lab/
+│
+├── README.md
+├── docs/
+│   ├── 01-environment-build.md
+│   ├── 02-identity-and-rbac.md
+│   ├── 03-endpoint-onboarding.md
+│   └── 04-soc-workflow.md
+│
+├── investigations/
+│   ├── INC-001-HR-PowerShell-Test/
+│   └── INC-002-Sales-PowerShell-Test/
+│
+├── hunting/
+│   └── README.md
+│
+├── runbooks/
+│   ├── alert-triage-checklist.md
+│   └── tier1-investigation-template.md
+│
+└── images/
+    ├── architecture/
+    ├── onboarding/
+    ├── alerts/
+    └── investigations/
+
+```
+---
 
 
 ## 🎯 Lab Objectives
@@ -84,7 +115,7 @@ graph TD
 ---
 
 ## 🛠️ Technologies Used
-* **SIEM/XDR:** Microsoft Defender XDR Portal
+* **XDR:** Microsoft Defender XDR Portal
 * **EDR/EPP:** Microsoft Defender for Endpoint (MDE)
 * **Identity & Access:** Microsoft Entra ID (Azure AD)
 * **Cloud Suite:** Microsoft 365 Enterprise
@@ -95,26 +126,45 @@ graph TD
 
 ---
 
-## 🧠 Skills Demonstrated (SOC Tier-1 Alignment)
-* 📥 **Endpoint Provisioning:** Manual and script-based onboarding configuration.
-* 🚦 **Alert Triage:** Analyzing severity, scoping impact, and determining true vs. false positives.
-* 🕵️‍♂️ **Incident Investigation:** Deep-dives into telemetry logs, artifacts, and network connections.
-* 🌿 **Process Tree Analysis:** Evaluating parent-child process relationships (e.g., `cmd.exe` spawned by `wscript.exe`).
-* 🕒 **Timeline Analysis:** Chronologically mapping adversary behavior from initial access to execution.
-* 🏷️ **IOC Collection:** Extracting file hashes (SHA256), malicious IPs, and rogue registry keys.
-* 📊 **Evidence-Based Reporting:** Writing concise executive summaries and detailed technical metrics.
+## 🧠 Skills Demonstrated
+
+### ✅ Completed and Validated
+
+* 📥 **Endpoint Onboarding:** Manually onboarded multiple Windows 11 endpoints using the Microsoft Defender for Endpoint local onboarding package.
+* 👥 **Least-Privilege User Configuration:** Created standard local business-user accounts and retained separate administrative credentials.
+* 🚦 **Alert Triage:** Reviewed severity, affected users, devices, command lines, and alert status.
+* 🌿 **Process Tree Analysis:** Examined parent-child relationships such as `cmd.exe → powershell.exe`.
+* 🔐 **File Trust Analysis:** Reviewed executable paths, Microsoft digital signatures, hashes, and VirusTotal detection ratios.
+* 📝 **Incident Documentation:** Recorded investigation findings and resolved a controlled alert as security testing.
+* 🧩 **Onboarding Troubleshooting:** Diagnosed insufficient privileges and successfully reran onboarding from an elevated command prompt.
+
+### 🚧 Planned
+
+* 🕒 Device timeline and event-sequence analysis
+* ⚔️ Controlled simulations involving Office documents and LOLBins
+* 📊 Advanced Hunting using KQL
+* 🌐 Network IOC and external-IP investigation
+* 🔁 Persistence and scheduled-task analysis
+* ☁️ Microsoft Sentinel integration
+
 
 ---
 
-## ⚔️ MITRE ATT&CK Mapping
+## ⚔️ MITRE ATT&CK Coverage
 
-The threat simulations executed within this lab environment map directly to the following industry-standard **MITRE ATT&CK** tactics and techniques:
+The following techniques are being validated through controlled simulations. Items are marked according to their current lab status.
 
-* 📨 **T1566 – Phishing:** Initial access simulation via malicious email attachments or links delivered to target endpoints.
-* 💻 **T1059.001 – Command and Scripting Interpreter (PowerShell):** Execution of secondary discovery payloads and obfuscated automation commands.
-* 🛡️ **T1218 – Signed Binary Proxy Execution:** Defense evasion utilizing trusted Windows system binaries to bypass local security controls.
-* 📥 **T1105 – Ingress Tool Transfer:** Transfer of external tools, malware artifacts, or utilities into the local system environment.
-* 💉 **T1055 – Process Injection (Planned):** Evasion and persistence via running malicious code within the address space of a legitimate process.
+| Status | Technique | Description |
+| :---: | :--- | :--- |
+| ✅ | **T1059.001 – PowerShell** | PowerShell execution and suspicious command-line analysis |
+| 🚧 | **T1566 – Phishing** | Planned email attachment and link investigation |
+| 🚧 | **T1218 – Signed Binary Proxy Execution** | Planned LOLBin simulations using trusted Windows binaries |
+| 🚧 | **T1105 – Ingress Tool Transfer** | Planned analysis of files transferred from external infrastructure |
+| 🚧 | **T1053.005 – Scheduled Task/Job** | Planned persistence simulation |
+| 🚧 | **T1562.001 – Impair Defenses** | Planned Defender-tampering investigation |
+
+> MITRE ATT&CK mappings are added only after the corresponding behavior has been generated, observed, and investigated in Microsoft Defender XDR.
+
 
 
 ---
@@ -130,6 +180,28 @@ The threat simulations executed within this lab environment map directly to the 
 - [ ] Onboard remaining departmental endpoints (Finance, Executive, IT)
 - [ ] Execute attack simulations and document complete incident lifecycles
 - [ ] Build a custom KQL threat hunting repository
+---
 
+
+## Privacy notice
+
+
+```markdown
+## 🔐 Security and Privacy Notice
+
+All activity was performed in an isolated personal lab tenant using controlled test endpoints.
+
+Sensitive information is excluded or redacted, including:
+
+* Tenant and subscription identifiers
+* Authentication details and passwords
+* Device identifiers
+* Public IP addresses
+* Personal contact information
+* Unredacted administrator account information
+
+No production systems or third-party environments were targeted.
+
+```
 
 
