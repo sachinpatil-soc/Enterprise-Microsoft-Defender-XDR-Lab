@@ -58,32 +58,28 @@ graph TD
 ## 📂 Repository Structure
 
 ```text
-Enterprise-Microsoft-Defender-XDR-Lab/
+Enterprise-Microsoft-Defender-XDR-Lab
 │
 ├── README.md
-├── docs/
-│   ├── 01-environment-build.md
-│   ├── 02-identity-and-rbac.md
-│   ├── 03-endpoint-onboarding.md
-│   └── 04-soc-workflow.md
 │
-├── investigations/
-│   ├── INC-001-HR-PowerShell-Test/
-│   └── INC-002-Sales-PowerShell-Test/
+├── investigations
+│   │
+│   ├── INC-001-HR-PowerShell-Test
+│   │      ├── README.md
+│   │      └── screenshots
+│   │
+│   └── INC-002-Sales-PowerShell
+│          ├── README.md
+│          └── screenshots
 │
-├── hunting/
-│   └── README.md
+├── kql
+│      └── (coming later)
 │
-├── runbooks/
-│   ├── alert-triage-checklist.md
-│   └── tier1-investigation-template.md
+├── scripts
+│      └── (coming later)
 │
-└── images/
-    ├── architecture/
-    ├── onboarding/
-    ├── alerts/
-    └── investigations/
-
+└── architecture
+       └── diagrams
 ```
 ---
 
