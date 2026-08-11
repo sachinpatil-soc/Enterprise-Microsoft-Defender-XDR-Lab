@@ -177,10 +177,12 @@ supported the conclusion that the activity originated from an **authorized Micro
 
 ## ✅ Final Disposition
 
-**Classification:** Expected / Authorized Activity  
-**Escalation:** Not Required  
-**Containment:** Not Required  
-**Status:** Resolved
+| Decision | Result |
+|---|---|
+| **Classification** | Expected / Authorized Activity |
+| **Escalation** | Not Required |
+| **Containment** | Not Required |
+| **Status** | Resolved |
 
 ### Reason for Resolution
 
