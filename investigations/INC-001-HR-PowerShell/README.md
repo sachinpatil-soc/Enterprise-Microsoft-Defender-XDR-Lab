@@ -65,7 +65,7 @@ C:\test-WDATP-test\invoice.exe
 
 ### 📸 Evidence 02 — Process Tree & Command Line
 
-![Process Tree](https://github.com/sachinpatil-soc/Enterprise-Microsoft-Defender-XDR-Lab/blob/e90cc1f798ec8cfe16427cc8b8d7d140add669ef/investigations/INC-001-HR-PowerShell/02-process-chain.png)
+![Process Tree and Command Line](https://github.com/sachinpatil-soc/Enterprise-Microsoft-Defender-XDR-Lab/blob/e90cc1f798ec8cfe16427cc8b8d7d140add669ef/investigations/INC-001-HR-PowerShell/02-process-chain.png)
 
 **Analyst observation:**  
 The combination of hidden PowerShell execution, execution-policy bypass, file download, and subsequent execution justified further investigation. The process tree alone was **not sufficient to determine maliciousness**.
@@ -102,7 +102,7 @@ cmd.exe [PID 9744]
 
 ### 📸 Evidence 03 — Advanced Hunting Correlation
 
-![Advanced Hunting](https://github.com/sachinpatil-soc/Enterprise-Microsoft-Defender-XDR-Lab/blob/a5cb4212741ce55799951dc5e7f1752e66972144/investigations/INC-001-HR-PowerShell/03-timeline-investigation.png)
+![Advanced Hunting PID Correlation](https://github.com/sachinpatil-soc/Enterprise-Microsoft-Defender-XDR-Lab/blob/a5cb4212741ce55799951dc5e7f1752e66972144/investigations/INC-001-HR-PowerShell/03-timeline-investigation.png)
 
 **Analyst observation:**  
 Matching `powershell.exe`'s `InitiatingProcessId` with the `ProcessId` of `cmd.exe` provided telemetry-based evidence of the parent-child relationship rather than relying only on process names.
@@ -131,7 +131,7 @@ DeviceProcessEvents
 
 ### 📸 Evidence 04 — Scope Analysis
 
-![Scope Analysis](https://github.com/sachinpatil-soc/Enterprise-Microsoft-Defender-XDR-Lab/blob/a5cb4212741ce55799951dc5e7f1752e66972144/investigations/INC-001-HR-PowerShell/04-kql-scope-hunt.png)
+![KQL Scope Analysis](https://github.com/sachinpatil-soc/Enterprise-Microsoft-Defender-XDR-Lab/blob/a5cb4212741ce55799951dc5e7f1752e66972144/investigations/INC-001-HR-PowerShell/04-kql-scope-hunt.png)
 
 The hunt returned two isolated historical lab occurrences:
 
