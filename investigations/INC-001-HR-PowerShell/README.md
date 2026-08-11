@@ -29,7 +29,7 @@ Because legitimate administrative activity can produce similar telemetry, the al
 
 ### 📸 Evidence 01 — Defender Alert
 
-![01-alert-overview.png](https://github.com/sachinpatil-soc/Enterprise-Microsoft-Defender-XDR-Lab/blob/e90cc1f798ec8cfe16427cc8b8d7d140add669ef/investigations/INC-001-HR-PowerShell/01-alert-overview.png)
+![Defender alert overview](https://github.com/sachinpatil-soc/Enterprise-Microsoft-Defender-XDR-Lab/blob/e90cc1f798ec8cfe16427cc8b8d7d140add669ef/investigations/INC-001-HR-PowerShell/01-alert-overview.png)
 
 **Analyst observation:**  
 The alert established the affected endpoint, user, severity, detection source, and suspicious PowerShell execution requiring investigation.
