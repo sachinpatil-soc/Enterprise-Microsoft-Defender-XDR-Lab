@@ -23,7 +23,7 @@ graph TD
 
     A[💻 MacBook Air Host]:::host
     B[⚙️ UTM Hypervisor]:::hyper
-    C1[🖥️ HR-LAPTOP-01]:::endpoint
+    C1[🖥️ SP-SOC-LAB-TIER-01-HR]:::endpoint
     C2[🖥️ SALES-LAPTOP-01]:::endpoint
     D[🛡️ Microsoft Defender for Endpoint Sensor]:::security
     E[☁️ Microsoft Defender XDR]:::security
