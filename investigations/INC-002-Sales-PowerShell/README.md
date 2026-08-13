@@ -1,106 +1,165 @@
-# 🚨 Incident 002 – Suspicious PowerShell Activity (Sales Department)
+# 🚨 INC-002 — Malware Prevented via AMSI
+
+> **Microsoft Defender XDR | Tier-1 SOC Investigation | Sales**
 
 ## 📋 Incident Summary
 
-| Field | Value |
-|-------|-------|
-| Incident ID | INC-002 |
-| Department | Sales |
-| User | Anna Becker |
-| Device | SALES-LAPTOP-01 |
-| Alert | Suspicious PowerShell Command Line |
-| Severity | Medium |
-| Status | Under Investigation |
+| Field            | Finding                                                   |
+| ---------------- | --------------------------------------------------------- |
+| 🚨 Alert         | An active 'MpTest' malware was prevented from executing via AMSI |
+| ⚠️ Severity      | Low                                                       |
+| 👤 User          | Anna Becker (Sales)                                       |
+| 💻 Endpoint      | `SP-SOC-LAB-TIER-01`                                      |
+| 🛡️ Detection    | Microsoft Defender for Endpoint                           |
+| 🔎 Investigation | Alert + Process Context + Timeline + KQL + Scope          |
+| ✅ Decision      | True Positive — Authorized Security Test / Blocked        |
 
 ---
 
-# 🎯 Objective
+## 🎯 Incident Overview
 
-Investigate a suspicious PowerShell execution generated on a Sales workstation using Microsoft Defender XDR.
+Microsoft Defender generated an alert after AMSI detected malicious test content during PowerShell script execution.
 
-The purpose of this investigation is to demonstrate a structured SOC Tier-1 investigation workflow including evidence collection, process tree analysis, timeline analysis, scope determination, and incident reporting.
+Defender prevented the detected content from executing, and the activity was investigated to confirm the affected user, process, remediation status, and scope.
 
----
+### 📸 Evidence 01 — Defender Alert
 
-# 🧠 Initial Assessment
+![Defender alert overview](01-alert-overview.png)
 
-At first glance, PowerShell execution on a Sales workstation is unusual because Sales employees do not normally execute administrative scripts.
-
-This does **not** immediately indicate malicious activity.
-
-An investigation is required to determine whether the activity is expected or suspicious.
+**Analyst observation:**
+The alert identified the affected endpoint and user and confirmed that Defender blocked the detected activity.
 
 ---
 
-# 🔍 Investigation Plan
+## 🌳 Process & Detection Analysis
 
-1. Review alert details.
-2. Analyze process tree.
-3. Inspect PowerShell command line.
-4. Review device timeline.
-5. Identify affected user and device.
-6. Determine investigation scope.
-7. Collect evidence.
-8. Make a final decision.
+The alert timeline identified PowerShell as the initiating process and showed the script associated with the detection:
 
----
+```text
+powershell.exe
+   │
+   └── AMSI_PoSh_script.ps1
+          │
+          └── Virus:Win32/MpTest!amsi
+```
 
-# 📂 Evidence Collection
+The observed command line included:
 
-> Screenshots will be added during the investigation.
+```text
+powershell.exe -ExecutionPolicy Bypass -File "C:\Users\Anna Becker (Sales)\Desktop\AMSI_PoSh_script.ps1"
+```
 
-## Process Tree
+### 📸 Evidence 02 — Alert Timeline & Detection
 
-(To be completed)
+![Alert timeline and detection](02-alert-timeline.png)
 
----
-
-## Timeline
-
-(To be completed)
+**Analyst observation:**
+The timeline confirmed that the PowerShell script triggered the AMSI detection and that Defender successfully prevented execution.
 
 ---
 
-## Command Line
+## 🔬 Advanced Hunting Validation
 
-(To be completed)
+Microsoft Defender Advanced Hunting was used to validate the PowerShell execution using endpoint telemetry.
 
----
+The investigation confirmed PowerShell activity associated with:
 
-## File Information
+```text
+AMSI_PoSh_script.ps1
+```
 
-(To be completed)
+on:
 
----
+```text
+SP-SOC-LAB-TIER-01
+Anna Becker (Sales)
+```
 
-## Network Activity
+### 📸 Evidence 03 — Advanced Hunting
 
-(To be completed)
+![Advanced Hunting validation](03-advanced-hunting.png)
 
----
-
-# 🌿 MITRE ATT&CK
-
-| Technique | Description |
-|------------|-------------|
-| T1059.001 | PowerShell |
-| T1105 | Ingress Tool Transfer |
-| T1218 | Signed Binary Proxy Execution (if applicable) |
+**Analyst observation:**
+Endpoint telemetry confirmed the PowerShell activity associated with the script on the affected device and user account.
 
 ---
 
-# 📝 Final Analysis
+## 🌍 Scope Investigation
 
-(To be completed after investigation)
+A focused scope check was performed to determine whether the same script activity appeared on additional endpoints.
+
+```kql
+DeviceProcessEvents
+| where Timestamp > ago(7d)
+| where ProcessCommandLine contains "AMSI_PoSh_script.ps1"
+| summarize
+    EventCount=count(),
+    FirstSeen=min(Timestamp),
+    LastSeen=max(Timestamp)
+    by DeviceName, AccountName
+| order by EventCount desc
+```
+
+### 📸 Evidence 04 — Scope Analysis
+
+![Scope analysis](04-scope-analysis.png)
+
+The hunt identified the activity only on:
+
+| Endpoint             | User                | Events |
+| -------------------- | ------------------- | -----: |
+| `SP-SOC-LAB-TIER-01` | Anna Becker (Sales) |      2 |
+
+No additional affected endpoints were identified within the searched Defender telemetry.
 
 ---
 
-# ✅ Decision
+## 🧠 Investigation Decision
 
-(To be completed)
+The detection was validated as a **True Positive** because Microsoft Defender correctly identified and blocked the test malware behavior through AMSI.
+
+Investigation confirmed:
+
+- PowerShell initiated the detected activity
+- AMSI identified `Virus:Win32/MpTest!amsi`
+- Defender successfully blocked execution
+- the activity was associated with the expected test script
+- scope analysis identified no additional affected endpoints
+
+The activity originated from an **authorized security validation exercise** and did not require containment or escalation.
 
 ---
 
-# 🎓 Lessons Learned
+## ⚔️ MITRE ATT&CK Mapping
 
-(To be completed)
+| Technique   | Description |
+| ----------- | ----------- |
+| `T1059.001` | PowerShell  |
+
+> MITRE ATT&CK techniques describe observed behavior; they do not by themselves prove malicious intent.
+
+---
+
+## ✅ Final Disposition
+
+**Classification:** True Positive — Authorized Security Test  
+**Detection Result:** Successfully Blocked  
+**Escalation:** Not Required  
+**Containment:** Not Required  
+**Status:** Resolved
+
+### Reason for Resolution
+
+Microsoft Defender correctly detected and blocked the test malware behavior through AMSI. Endpoint telemetry validated the PowerShell execution, and scope analysis identified no additional affected endpoints within the available dataset.
+
+---
+
+## 🎓 SOC Skills Demonstrated
+
+`Alert Triage` • `Process Analysis` • `AMSI Detection` • `PowerShell Analysis` • `KQL` • `Advanced Hunting` • `Scope Analysis` • `Incident Disposition`
+
+---
+
+### 🛡️ Analyst Takeaway
+
+> **A successful prevention still requires validation: confirm what triggered the detection, verify the security control acted successfully, check the scope, and document the final disposition.**
