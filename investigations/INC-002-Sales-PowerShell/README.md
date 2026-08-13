@@ -24,7 +24,7 @@ Defender prevented the detected content from executing, and the activity was inv
 
 ### 📸 Evidence 01 — Defender Alert
 
-![Defender alert overview](01-alert-overview.png)
+![Defender alert overview](https://github.com/sachinpatil-soc/Enterprise-Microsoft-Defender-XDR-Lab/blob/0498c09d73eaa6c3a8507f83dd0640a784fd8182/investigations/INC-002-Sales-PowerShell/INC-02Alert-INC-2.png)
 
 **Analyst observation:**
 The alert identified the affected endpoint and user and confirmed that Defender blocked the detected activity.
@@ -51,7 +51,7 @@ powershell.exe -ExecutionPolicy Bypass -File "C:\Users\Anna Becker (Sales)\Deskt
 
 ### 📸 Evidence 02 — Alert Timeline & Detection
 
-![Alert timeline and detection](02-alert-timeline.png)
+![Alert timeline and detection](https://github.com/sachinpatil-soc/Enterprise-Microsoft-Defender-XDR-Lab/blob/0498c09d73eaa6c3a8507f83dd0640a784fd8182/investigations/INC-002-Sales-PowerShell/INC-02Alert-Timeline.png)
 
 **Analyst observation:**
 The timeline confirmed that the PowerShell script triggered the AMSI detection and that Defender successfully prevented execution.
@@ -77,7 +77,7 @@ Anna Becker (Sales)
 
 ### 📸 Evidence 03 — Advanced Hunting
 
-![Advanced Hunting validation](03-advanced-hunting.png)
+![Advanced Hunting validation](https://github.com/sachinpatil-soc/Enterprise-Microsoft-Defender-XDR-Lab/blob/0498c09d73eaa6c3a8507f83dd0640a784fd8182/investigations/INC-002-Sales-PowerShell/INC-02KQL-Advance-Hunting.png)
 
 **Analyst observation:**
 Endpoint telemetry confirmed the PowerShell activity associated with the script on the affected device and user account.
@@ -102,7 +102,7 @@ DeviceProcessEvents
 
 ### 📸 Evidence 04 — Scope Analysis
 
-![Scope analysis](04-scope-analysis.png)
+![Scope analysis](https://github.com/sachinpatil-soc/Enterprise-Microsoft-Defender-XDR-Lab/blob/0498c09d73eaa6c3a8507f83dd0640a784fd8182/investigations/INC-002-Sales-PowerShell/INC-02Scope-Advance-Hunting.png)
 
 The hunt identified the activity only on:
 
