@@ -22,7 +22,7 @@ The scenario was generated in a controlled Microsoft Defender Attack Simulation 
 
 The user received a simulated quarantine notification containing a **Release Message** link designed to represent a credential-harvesting attempt.
 
-![Phishing Email](screenshots/01-phishing-email-received.png)
+![Phishing Email](https://github.com/sachinpatil-soc/Enterprise-Microsoft-Defender-XDR-Lab/blob/1244e01238806498b573519fa6e46ae2cf680f0c/investigations/INC-003-CEO%20Phishing%20Investigation/01-phishing-email-received.png)
 
 ### 2. User Activity
 
@@ -34,7 +34,7 @@ Attack Simulation Training confirmed:
 - Credentials supplied: **0/1**
 - Compromised users: **0/1**
 
-![Attack Simulation Activity](screenshots/02-attack-simulation-user-activity.png)
+![Attack Simulation Activity](https://github.com/sachinpatil-soc/Enterprise-Microsoft-Defender-XDR-Lab/blob/1244e01238806498b573519fa6e46ae2cf680f0c/investigations/INC-003-CEO%20Phishing%20Investigation/02-attack-simulation-user-activity.png)
 
 ### 3. Defender Incident
 
@@ -42,7 +42,7 @@ Microsoft Defender XDR correlated the activity into an incident categorized as *
 
 I retained Defender's **Low** severity rather than manually increasing it based on the user's executive role.
 
-![Defender Incident](screenshots/03-defender-credential-phish-incident.png)
+![Defender Incident](https://github.com/sachinpatil-soc/Enterprise-Microsoft-Defender-XDR-Lab/blob/1244e01238806498b573519fa6e46ae2cf680f0c/investigations/INC-003-CEO%20Phishing%20Investigation/03-defender-credential-phish-incident.png)
 
 ### 4. KQL Scope Check
 
@@ -67,7 +67,7 @@ EmailEvents
 
 The query identified related Attack Simulation Training email telemetry and provided the `NetworkMessageId` for potential deeper investigation.
 
-![Advanced Hunting](screenshots/04-advanced-hunting-email-scope.png)
+![Advanced Hunting](https://github.com/sachinpatil-soc/Enterprise-Microsoft-Defender-XDR-Lab/blob/1244e01238806498b573519fa6e46ae2cf680f0c/investigations/INC-003-CEO%20Phishing%20Investigation/04-advanced-hunting-email-scope.png)
 
 ## Analyst Decision
 
