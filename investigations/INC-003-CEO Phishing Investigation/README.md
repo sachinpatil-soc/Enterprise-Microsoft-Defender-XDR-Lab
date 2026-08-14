@@ -1,4 +1,4 @@
-# INC-003 — Credential Phishing Investigation
+# INC-003 — CEO Phishing Investigation
 
 ## Overview
 
