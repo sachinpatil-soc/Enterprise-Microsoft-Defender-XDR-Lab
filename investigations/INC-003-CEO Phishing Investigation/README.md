@@ -127,7 +127,7 @@ EmailEvents
 
 ### 📸 Evidence 05 — Advanced Hunting
 
-![Advanced Hunting](screenshots/05-advanced-hunting-email-scope.png)
+![Advanced Hunting](https://github.com/sachinpatil-soc/Enterprise-Microsoft-Defender-XDR-Lab/blob/b8a06c0ea22c0e6157757462abfc1e584fbb6955/investigations/INC-003-CEO%20Phishing%20Investigation/05-advanced-hunting-email-scope.png)
 
 The query returned one related Attack Simulation Training email event:
 
