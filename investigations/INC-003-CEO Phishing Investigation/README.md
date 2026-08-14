@@ -33,7 +33,7 @@ The user received a simulated quarantine notification containing a **Release Mes
 
 ### 📸 Evidence 01 — Phishing Email
 
-![Phishing Email](investigations/INC-003-CEO Phishing Investigation/01-phishing-email-received.png)
+![Phishing Email](https://github.com/sachinpatil-soc/Enterprise-Microsoft-Defender-XDR-Lab/blob/d0f9149d544992d2d868a78886755673b5b25690/investigations/INC-003-CEO%20Phishing%20Investigation/01-phishing-email-received.png)
 
 **Observation:**  
 The email used a business-themed quarantine notification and prompted the executive user to interact with a link.
