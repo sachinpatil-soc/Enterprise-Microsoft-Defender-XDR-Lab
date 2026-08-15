@@ -2,28 +2,29 @@
 
 > **Microsoft Defender XDR | Tier-1 SOC Investigation | Executive User**
 
+
 ## 📋 Incident Summary
 
 | Field | Finding |
 |---|---|
-| 🎣 Scenario | Credential Phishing |
-| 👤 Target | Michael Weber — Chief Executive Officer |
-| 🛡️ Platform | Microsoft Defender XDR / Defender for Office 365 |
-| ⚠️ Defender Severity | Low |
-| 📌 Defender Status | Resolved |
-| 🏷️ Defender Classification | Unclassified |
-| 👆 User Interaction | Email read + phishing link clicked |
-| 🔐 Credentials Submitted | No |
-| 🔎 Analyst Assessment | Phishing interaction confirmed; compromise not confirmed |
-| 🚨 Analyst Recommendation | Escalate to Tier-2 for additional validation |
+| 👤 User | Michael Weber — Chief Executive Officer |
+| 💻 Endpoint | `sp-soc-lab-tier-01` |
+| 🛡️ Platform | Microsoft Defender XDR |
+| ⚠️ Final Severity | Medium |
+| 📌 Final Status | Active |
+| 🏷️ Classification | True Positive — Multi-staged attack |
+| 🔎 Activity | Suspicious PowerShell execution + endpoint discovery |
+| 🚨 Tier-1 Decision | Escalated to Tier-2 |
 
 ---
 
 ## 🎯 Overview
 
-A controlled **Credential Harvest** phishing simulation targeted an executive user.
+INC-003 began with a controlled credential-phishing simulation targeting executive user **Michael Weber**.
 
-The Tier-1 investigation focused on validating the phishing interaction, reviewing the Defender alert and incident, checking available email telemetry, and determining whether additional investigation would be appropriate.
+Further investigation identified suspicious PowerShell execution and endpoint discovery activity on `sp-soc-lab-tier-01`. Microsoft Defender correlated the activity into a multi-stage incident involving **Execution** and **Discovery**.
+
+Tier-1 classified the incident as a **True Positive — Multi-staged attack** and escalated it to Tier-2 for deeper investigation.
 
 ---
 
@@ -104,78 +105,40 @@ The incident connected the reported phishing activity with the affected executiv
 
 ---
 
-## 5️⃣ Advanced Hunting Scope Check
+## 5️⃣ Tier-1 Escalation
 
-A focused `EmailEvents` query was used to review recent email telemetry associated with the affected mailbox.
+Further investigation identified suspicious PowerShell execution on `sp-soc-lab-tier-01`, including:
 
-```kql
-EmailEvents
-| where Timestamp > ago(2d)
-| where RecipientEmailAddress =~ "Michael.Weber@PatilCyberSolutionsGmbH.onmicrosoft.com"
-| project Timestamp,
-          SenderFromAddress,
-          SenderFromDomain,
-          RecipientEmailAddress,
-          Subject,
-          ThreatTypes,
-          DetectionMethods,
-          DeliveryAction,
-          DeliveryLocation,
-          NetworkMessageId
-| order by Timestamp desc
-```
+- Execution-policy bypass
+- Hidden PowerShell execution
+- Attempted executable download/start
+- Subsequent `whoami`, `hostname`, and `ipconfig /all` discovery activity
 
-### 📸 Evidence 05 — Advanced Hunting
+Microsoft Defender correlated the **Execution** and **Discovery** activity into the same Medium-severity incident.
 
-![Advanced Hunting](https://github.com/sachinpatil-soc/Enterprise-Microsoft-Defender-XDR-Lab/blob/b8a06c0ea22c0e6157757462abfc1e584fbb6955/investigations/INC-003-CEO%20Phishing%20Investigation/05-advanced-hunting-email-scope.png)
+### 📸 Evidence 05 — Tier-1 Escalation Summary
 
-The query returned one related Attack Simulation Training email event:
-
-- Sender: `notification@attacksimulationtraining.com`
-- Recipient: Michael Weber
-- Subject: `Training assignment notification`
-- Delivery action: `Delivered`
-- Delivery location: `Inbox/folder`
-- `NetworkMessageId` available for further pivoting
+![Tier-1 Escalation Summary](https://github.com/sachinpatil-soc/Enterprise-Microsoft-Defender-XDR-Lab/blob/0b0b4b96e4b1c979ebf9260fca09000175729207/investigations/INC-003-CEO%20Phishing%20Investigation/05-tier1-escalation-summary.png)
 
 **Observation:**  
-This query provided supporting mailbox telemetry. It did **not independently classify the returned email event as phishing**, so it was not used as proof of maliciousness.
+The correlated PowerShell and discovery activity provided sufficient evidence for Tier-1 escalation. Successful payload execution or account compromise was not confirmed during Tier-1 analysis, so the incident remained **Active** pending further investigation.
 
 ---
 
-## 🧠 Tier-1 Assessment
+## 🚨 Final Tier-1 Decision
 
-The available evidence confirmed:
+**True Positive — Multi-staged attack → Escalated to Tier-2**
 
-- an executive user was targeted in a controlled credential-phishing simulation;
-- the message was delivered and read;
-- the phishing link was clicked;
-- Defender generated a phishing-related alert and Credential Phish incident;
-- no credential submission was recorded;
-- no account compromise was confirmed during Tier-1 review.
+The escalation was based on the combination of suspicious PowerShell execution and subsequent endpoint discovery activity, not solely on the user's executive role.
 
-The executive role increases the potential **business impact**, but it does not by itself determine alert severity or prove compromise.
-
----
-
-## 🚨 Analyst Recommendation
-
-**Recommend escalation to Tier-2 for additional identity and mailbox validation.**
-
-The recommendation is based on the combination of:
-
-- credential-phishing activity;
-- confirmed user interaction with the phishing link; and
-- the potential impact associated with a high-value executive account.
-
-The Tier-1 investigation does **not** claim that credentials were stolen or that the account was compromised.
+A **Tier-2 Investigation Required** task was created for deeper validation.
 
 ---
 
 ## 🎓 SOC Skills Demonstrated
 
-`Alert Triage` · `Phishing Analysis` · `Microsoft Defender XDR` · `Defender for Office 365` · `KQL` · `Advanced Hunting` · `Scope Analysis` · `Evidence-Based Escalation`
+`Alert Triage` · `Microsoft Defender XDR` · `PowerShell Analysis` · `KQL` · `Advanced Hunting` · `Custom Detection` · `Incident Correlation` · `Tier-1 Escalation`
 
 ---
 
-> **Lab Note:** This incident was generated in an authorized Microsoft security lab using Microsoft Defender Attack Simulation Training. All activity shown is controlled simulation data.
+> **Lab Note:** This investigation was performed in an authorized Microsoft Defender security lab using controlled Attack Simulation Training, endpoint test activity, and custom detection telemetry.
