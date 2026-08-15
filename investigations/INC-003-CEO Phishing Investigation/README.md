@@ -80,7 +80,7 @@ The phishing alert established the initial security signal for the investigation
 
 ## 4️⃣ Defender Incident
 
-Microsoft Defender correlated the activity into:
+Microsoft Defender associated the reported phishing activity with the affected executive user in:
 
 **Email reported by user as malware or phish involving one user**
 
@@ -112,7 +112,7 @@ Further investigation identified suspicious PowerShell execution on `sp-soc-lab-
 - Attempted executable download/start
 - Subsequent `whoami`, `hostname`, and `ipconfig /all` discovery activity
 
-Microsoft Defender correlated the **Execution** and **Discovery** activity into the same Medium-severity incident.
+Microsoft Defender correlated the subsequent **Execution** and **Discovery** activity into a Medium-severity multi-stage incident involving the same executive user and endpoint.
 
 ### 📸 Evidence 05 — Tier-1 Escalation Summary
 
