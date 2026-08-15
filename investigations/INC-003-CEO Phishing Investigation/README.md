@@ -60,25 +60,21 @@ The phishing link was clicked, but the available simulation evidence showed **no
 
 ---
 
-## 3️⃣ Defender Alert
+ ## 3️⃣ Defender Alert
 
 Microsoft Defender generated the alert:
 
 **Email reported by user as malware or phish**
 
-The alert showed:
-
-- Severity: **Low**
-- Status: **Resolved**
-- Classification: **Not Set**
-- Category: **Initial Access**
+The alert provided the initial Defender signal associated with the reported phishing activity.
 
 ### 📸 Evidence 03 — Defender Alert
 
-![Defender Alert](https://github.com/sachinpatil-soc/Enterprise-Microsoft-Defender-XDR-Lab/blob/96d9e1c7334383a0d86bcc078fc6b925e710230c/investigations/INC-003-CEO%20Phishing%20Investigation/02-attack-simulation-user-activity.png)
+![Defender Alert](https://github.com/sachinpatil-soc/Enterprise-Microsoft-Defender-XDR-Lab/blob/13dd72bf2a4d43ca877b812b129c72a9e4c4a6cc/investigations/INC-003-CEO%20Phishing%20Investigation/03-defender-alert-email-reported-phish.png)
 
 **Observation:**  
-A genuine Defender alert was generated from the reported phishing workflow. The Defender-assigned severity was retained as **Low** rather than manually increasing it because the affected user was an executive.
+The phishing alert established the initial security signal for the investigation. Tier-1 continued reviewing the affected user and related telemetry to determine whether additional suspicious activity was present.
+
 
 ---
 
@@ -105,7 +101,9 @@ The incident connected the reported phishing activity with the affected executiv
 
 ---
 
-## 5️⃣ Tier-1 Escalation
+
+
+## 5️⃣ Tier-1 Escalation Summary
 
 Further investigation identified suspicious PowerShell execution on `sp-soc-lab-tier-01`, including:
 
@@ -117,6 +115,7 @@ Further investigation identified suspicious PowerShell execution on `sp-soc-lab-
 Microsoft Defender correlated the **Execution** and **Discovery** activity into the same Medium-severity incident.
 
 ### 📸 Evidence 05 — Tier-1 Escalation Summary
+
 
 ![Tier-1 Escalation Summary](https://github.com/sachinpatil-soc/Enterprise-Microsoft-Defender-XDR-Lab/blob/0b0b4b96e4b1c979ebf9260fca09000175729207/investigations/INC-003-CEO%20Phishing%20Investigation/05-tier1-escalation-summary.png)
 
