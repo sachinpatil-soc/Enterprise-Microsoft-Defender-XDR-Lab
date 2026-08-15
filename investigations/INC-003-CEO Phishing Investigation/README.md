@@ -13,7 +13,7 @@
 | ⚠️ Final Severity | Medium |
 | 📌 Final Status | Active |
 | 🏷️ Classification | True Positive — Multi-staged attack |
-| 🔎 Activity | Suspicious PowerShell execution + endpoint discovery |
+| 🔎 Activity | Suspicious PowerShell execution + endpoint discovery 
 | 🚨 Tier-1 Decision | Escalated to Tier-2 |
 
 ---
