@@ -9,51 +9,13 @@ The objective of this lab is to gain practical, hands-on experience with enterpr
 
 ---
 
+## 🏗️ Architecture Diagram 
 
-``` Mermaid
+
+```Mermaid
 
 graph TD
-    A[MacBook Air Host]
-    B[UTM Hypervisor]
-    C1[SP-SOC-LAB-TIER-01-HR]
-    C2[SP-SOC-LAB-TIER-01-SALES]
-    C3[SP-SOC-LAB-TIER-01-CEO]
-    D[Microsoft Defender for Endpoint Sensor]
-    E[Microsoft Defender XDR]
-    F[Microsoft Entra ID]
-    G[SOC Analyst Investigation]
-
-    %% Core Infrastructure Connections
-    A --> B
-    
-    %% Hypervisor Connected to all 3 VMs
-    B --> C1
-    B --> C2
-    B --> C3
-
-    %% Telemetry to Defender
-    C1 --> D
-    C2 --> D
-    C3 --> D
-    D --> E
-    F --> E
-    E --> G
-
-    %% Containers
-    subgraph Local_Lab["Local Lab Environment"]
-        A
-        B
-        C1
-        C2
-        C3
-    end
-
-    subgraph Microsoft_Cloud["Microsoft Security Cloud"]
-        E
-        F
-    end
-
-    %% Styles Definition
+    %% Styles
     classDef host fill:#2d3748,stroke:#1a202c,stroke-width:2px,color:#fff;
     classDef hyper fill:#4a5568,stroke:#2d3748,stroke-width:2px,color:#fff;
     classDef endpoint fill:#3182ce,stroke:#2b6cb0,stroke-width:2px,color:#fff;
@@ -61,14 +23,35 @@ graph TD
     classDef identity fill:#dd6b20,stroke:#c05621,stroke-width:2px,color:#fff;
     classDef soc fill:#319795,stroke:#2c7a7b,stroke-width:2px,color:#fff;
 
-    %% Style Assignments
-    class A host;
-    class B hyper;
-    class C1,C2,C3 endpoint;
-    class D,E security;
-    class F identity;
-    class G soc;
+    A[💻 MacBook Air Host]:::host
+    B[⚙️ UTM Hypervisor]:::hyper
+    C1[🖥️ SP-SOC-LAB-TIER-01-HR]:::endpoint
+    C2[🖥️ SP-SOC-LAB-TIER-01-SALES]:::endpoint
+    D[🛡️ Microsoft Defender for Endpoint Sensor]:::security
+    E[☁️ Microsoft Defender XDR]:::security
+    F[🆔 Microsoft Entra ID]:::identity
+    G[🔍 SOC Analyst Investigation]:::soc
 
+    A --> B
+    B --> C1
+    B --> C2
+    C1 --> D
+    C2 --> D
+    D --> E
+    F --> E
+    E --> G
+
+    subgraph Local_Lab["Local Lab Environment"]
+        A
+        B
+        C1
+        C2
+    end
+
+    subgraph Microsoft_Cloud["Microsoft Security Cloud"]
+        E
+        F
+    end
 
 
 
