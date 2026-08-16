@@ -11,9 +11,10 @@ The objective of this lab is to gain practical, hands-on experience with enterpr
 
 ## 🏗️ Architecture Diagram 
 
+---
 
-```Mermaid
 
+```mermaid
 graph TD
     %% Styles
     classDef host fill:#2d3748,stroke:#1a202c,stroke-width:2px,color:#fff;
@@ -62,7 +63,7 @@ graph TD
     end
 
 
- ```
+```
 
 
 
@@ -112,8 +113,9 @@ Enterprise-Microsoft-Defender-XDR-Lab
 
 | Department | User Name | Device Hostname | Status |
 | :--- | :--- | :--- | :--- |
-| **Human Resources** | Emma Wilson | `HR-LAPTOP-01` | 🟢 Active / Onboarded |
-| **Sales** | Anna Becker | `SALES-LAPTOP-01` | 🟢 Active / Onboarded |
+| **Human Resources** | Emma Wilson | `SP-SOC-LAB-TIER-01-HR` | 🟢 Active / Onboarded |
+| **Sales** | Anna Becker | `SP-SOC-LAB-TIER-01-SALES` | 🟢 Active / Onboarded |
+| **CEO | Michael Weber | `SP-SOC-LAB-TIER-01-CEO` | 🟢 Active / Onboarded |
 | **Finance** | John Schneider | `FIN-LAPTOP-01` | ⏳ Planned |
 | **Executive** | Michael Weber | `EXEC-LAPTOP-01` | ⏳ Planned |
 | **IT Administration** | Alex Müller | `MGMT-WORKSTATION` | ⏳ Planned |
@@ -159,57 +161,51 @@ Enterprise-Microsoft-Defender-XDR-Lab
 
 ## ⚔️ MITRE ATT&CK Coverage
 
-The following techniques are being validated through controlled simulations. Items are marked according to their current lab status.
+The following MITRE ATT&CK techniques were validated through controlled simulations and Microsoft Defender XDR investigations.
 
-| Status | Technique | Description |
+| Status | Technique | Validation |
 | :---: | :--- | :--- |
-| ✅ | **T1059.001 – PowerShell** | PowerShell execution and suspicious command-line analysis |
-| 🚧 | **T1566 – Phishing** | Planned email attachment and link investigation |
-| 🚧 | **T1218 – Signed Binary Proxy Execution** | Planned LOLBin simulations using trusted Windows binaries |
-| 🚧 | **T1105 – Ingress Tool Transfer** | Planned analysis of files transferred from external infrastructure |
+| ✅ | **T1059.001 – PowerShell** | Suspicious PowerShell execution and command-line activity investigated in Defender XDR |
+| ✅ | **T1566 – Phishing** | Credential-phishing simulation, user interaction, alert triage, and incident investigation |
+| ✅ | **T1087 – Account Discovery** | Account discovery activity observed during endpoint investigation |
+| ✅ | **T1033 – System Owner/User Discovery** | User-context discovery using `whoami` |
+| ✅ | **T1016 – System Network Configuration Discovery** | Network configuration discovery activity investigated |
+| 🚧 | **T1218 – Signed Binary Proxy Execution** | Planned LOLBin simulation using trusted Windows binaries |
+| 🚧 | **T1105 – Ingress Tool Transfer** | Planned controlled file-transfer investigation |
 | 🚧 | **T1053.005 – Scheduled Task/Job** | Planned persistence simulation |
 | 🚧 | **T1562.001 – Impair Defenses** | Planned Defender-tampering investigation |
 
-> MITRE ATT&CK mappings are added only after the corresponding behavior has been generated, observed, and investigated in Microsoft Defender XDR.
-
-
+> MITRE ATT&CK mappings are documented only when the corresponding behavior has been generated, observed, and investigated in the lab.
 
 ---
 
 ## 📈 Current Project Progress
 
 - [x] Create and configure Microsoft 365 enterprise tenant
-- [x] Deploy and initialize Microsoft Defender XDR licensing
-- [x] Provision Entra ID enterprise users and assign security groups
-- [x] Onboard `HR-LAPTOP-01` to Microsoft Defender for Endpoint
-- [x] Onboard `SALES-LAPTOP-01` to Microsoft Defender for Endpoint
-- [x] Onboard `CEO-LAPTOP-01` to Microsoft Defender for Endpoint 
-- [x] Standardize SOC incident investigation templates and triage workflow
-- [ ] Onboard remaining departmental endpoints (Finance, Executive, IT)
-- [ ] Execute attack simulations and document complete incident lifecycles
-- [ ] Build a custom KQL threat hunting repository
+- [x] Deploy and configure Microsoft Defender XDR
+- [x] Provision Microsoft Entra ID users and security groups
+- [x] Deploy HR, Sales, and CEO test endpoints
+- [x] Onboard lab endpoints to Microsoft Defender for Endpoint
+- [x] Configure SOC incident investigation and triage workflow
+- [x] Execute controlled phishing and endpoint attack simulations
+- [x] Investigate Defender alerts and correlated incidents
+- [x] Perform KQL-based threat hunting and telemetry validation
+- [x] Document Tier-1 investigation and escalation workflows
+- [x] Document complete incident investigation lifecycles
+
 ---
 
-
-## Privacy notice
-
-
-```markdown
 ## 🔐 Security and Privacy Notice
 
 All activity was performed in an isolated personal lab tenant using controlled test endpoints.
 
 Sensitive information is excluded or redacted, including:
 
-* Tenant and subscription identifiers
-* Authentication details and passwords
-* Device identifiers
-* Public IP addresses
-* Personal contact information
-* Unredacted administrator account information
+- Tenant and subscription identifiers
+- Authentication details and passwords
+- Device identifiers
+- Public IP addresses
+- Personal contact information
+- Unredacted administrator account information
 
 No production systems or third-party environments were targeted.
-
-```
-
-
