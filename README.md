@@ -5,7 +5,7 @@
 
 This project demonstrates the design, deployment, and operation of a simulated enterprise Security Operations Center (SOC) using **Microsoft Defender XDR**. 
 
-The objective of this lab is to gain practical, hands-on experience with enterprise endpoint security, Microsoft Defender for Endpoint (MDE), incident investigation, and SOC workflows that closely resemble a live production environment. Rather than focusing on isolated demonstrations, this lab simulates a small, functional organization featuring multiple departments, business users, and Windows endpoints.
+The objective of this lab is to gain practical, hands-on experience with enterprise endpoint security, Microsoft Defender for Endpoint (MDE), incident investigation, and SOC workflows. Rather than focusing on isolated demonstrations, the lab models a small organization with multiple departments, business users, Windows endpoints, and controlled security scenarios.
 
 ---
 
@@ -80,15 +80,17 @@ Enterprise-Microsoft-Defender-XDR-Lab
 │   │      ├── README.md
 │   │      └── screenshots
 │   │
-│   └── INC-002-Sales-PowerShell
+│   ├── INC-002-Sales-PowerShell
+│   │      ├── README.md
+│   │      └── screenshots
+│   │
+│   └── INC-003-CEO-Phishing-Investigation
 │          ├── README.md
 │          └── screenshots
 │
 ├── kql
-│      └── (coming later)
 │
 ├── scripts
-│      └── (coming later)
 │
 └── architecture
        └── diagrams
@@ -115,9 +117,8 @@ Enterprise-Microsoft-Defender-XDR-Lab
 | :--- | :--- | :--- | :--- |
 | **Human Resources** | Emma Wilson | `SP-SOC-LAB-TIER-01-HR` | 🟢 Active / Onboarded |
 | **Sales** | Anna Becker | `SP-SOC-LAB-TIER-01-SALES` | 🟢 Active / Onboarded |
-| **CEO | Michael Weber | `SP-SOC-LAB-TIER-01-CEO` | 🟢 Active / Onboarded |
+| **CEO** | Michael Weber | `SP-SOC-LAB-TIER-01-CEO` | 🟢 Active / Onboarded |
 | **Finance** | John Schneider | `FIN-LAPTOP-01` | ⏳ Planned |
-| **Executive** | Michael Weber | `EXEC-LAPTOP-01` | ⏳ Planned |
 | **IT Administration** | Alex Müller | `MGMT-WORKSTATION` | ⏳ Planned |
 | **Security Operations** | Sachin Patil | `SOC-ANALYST-01` | 💻 Defender Portal Access |
 
@@ -139,20 +140,20 @@ Enterprise-Microsoft-Defender-XDR-Lab
 
 ### ✅ Completed and Validated
 
-* 📥 **Endpoint Onboarding:** Manually onboarded multiple Windows 11 endpoints using the Microsoft Defender for Endpoint local onboarding package.
-* 👥 **Least-Privilege User Configuration:** Created standard local business-user accounts and retained separate administrative credentials.
-* 🚦 **Alert Triage:** Reviewed severity, affected users, devices, command lines, and alert status.
-* 🌿 **Process Tree Analysis:** Examined parent-child relationships such as `cmd.exe → powershell.exe`.
-* 🔐 **File Trust Analysis:** Reviewed executable paths, Microsoft digital signatures, hashes, and VirusTotal detection ratios.
-* 📝 **Incident Documentation:** Recorded investigation findings and resolved a controlled alert as security testing.
-* 🧩 **Onboarding Troubleshooting:** Diagnosed insufficient privileges and successfully reran onboarding from an elevated command prompt.
+* 📥 **Endpoint Onboarding:** Onboarded multiple Windows 11 endpoints to Microsoft Defender for Endpoint.
+* 👥 **Identity & Access:** Configured Microsoft Entra ID users, groups, and business-user identities.
+* 🚦 **Alert Triage:** Reviewed severity, affected users, devices, command lines, alert status, and supporting evidence.
+* 🌿 **Process Analysis:** Investigated suspicious PowerShell execution and related process activity.
+* 🔎 **Advanced Hunting:** Used KQL to investigate endpoint and email telemetry.
+* 🎣 **Phishing Investigation:** Investigated simulated credential-phishing activity and user interaction.
+* 🔗 **Incident Correlation:** Analyzed correlated Execution and Discovery activity in Microsoft Defender XDR.
+* 🚨 **Tier-1 Escalation:** Escalated suspicious multi-stage activity for deeper Tier-2 validation.
+* 📝 **Incident Documentation:** Documented investigation findings, evidence, analyst decisions, and incident lifecycles.
 
 ### 🚧 Planned
 
-* 🕒 Device timeline and event-sequence analysis
-* ⚔️ Controlled simulations involving Office documents and LOLBins
-* 📊 Advanced Hunting using KQL
-* 🌐 Network IOC and external-IP investigation
+* ⚔️ Controlled LOLBin simulations
+* 🌐 Additional network IOC investigation
 * 🔁 Persistence and scheduled-task analysis
 * ☁️ Microsoft Sentinel integration
 
@@ -167,7 +168,6 @@ The following MITRE ATT&CK techniques were validated through controlled simulati
 | :---: | :--- | :--- |
 | ✅ | **T1059.001 – PowerShell** | Suspicious PowerShell execution and command-line activity investigated in Defender XDR |
 | ✅ | **T1566 – Phishing** | Credential-phishing simulation, user interaction, alert triage, and incident investigation |
-| ✅ | **T1087 – Account Discovery** | Account discovery activity observed during endpoint investigation |
 | ✅ | **T1033 – System Owner/User Discovery** | User-context discovery using `whoami` |
 | ✅ | **T1016 – System Network Configuration Discovery** | Network configuration discovery activity investigated |
 | 🚧 | **T1218 – Signed Binary Proxy Execution** | Planned LOLBin simulation using trusted Windows binaries |
@@ -203,7 +203,7 @@ Sensitive information is excluded or redacted, including:
 
 - Tenant and subscription identifiers
 - Authentication details and passwords
-- Device identifiers
+- Sensitive tenant and device identifiers
 - Public IP addresses
 - Personal contact information
 - Unredacted administrator account information
