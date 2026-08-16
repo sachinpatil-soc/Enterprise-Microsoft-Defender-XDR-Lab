@@ -25,8 +25,11 @@ graph TD
 
     A[💻 MacBook Air Host]:::host
     B[⚙️ UTM Hypervisor]:::hyper
+
     C1[🖥️ SP-SOC-LAB-TIER-01-HR]:::endpoint
     C2[🖥️ SP-SOC-LAB-TIER-01-SALES]:::endpoint
+    C3[🖥️ SP-SOC-LAB-TIER-01-CEO]:::endpoint
+
     D[🛡️ Microsoft Defender for Endpoint Sensor]:::security
     E[☁️ Microsoft Defender XDR]:::security
     F[🆔 Microsoft Entra ID]:::identity
@@ -35,8 +38,12 @@ graph TD
     A --> B
     B --> C1
     B --> C2
+    B --> C3
+
     C1 --> D
     C2 --> D
+    C3 --> D
+
     D --> E
     F --> E
     E --> G
@@ -46,13 +53,13 @@ graph TD
         B
         C1
         C2
+        C3
     end
 
     subgraph Microsoft_Cloud["Microsoft Security Cloud"]
         E
         F
     end
-
 
 
  ```
@@ -176,6 +183,7 @@ The following techniques are being validated through controlled simulations. Ite
 - [x] Provision Entra ID enterprise users and assign security groups
 - [x] Onboard `HR-LAPTOP-01` to Microsoft Defender for Endpoint
 - [x] Onboard `SALES-LAPTOP-01` to Microsoft Defender for Endpoint
+- [x] Onboard `CEO-LAPTOP-01` to Microsoft Defender for Endpoint 
 - [x] Standardize SOC incident investigation templates and triage workflow
 - [ ] Onboard remaining departmental endpoints (Finance, Executive, IT)
 - [ ] Execute attack simulations and document complete incident lifecycles
