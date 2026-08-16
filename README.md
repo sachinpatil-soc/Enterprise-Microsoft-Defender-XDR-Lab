@@ -11,9 +11,6 @@ The objective of this lab is to gain practical, hands-on experience with enterpr
 
 ## 🏗️ Architecture Diagram 
 
----
-
-
 ```mermaid
 graph TD
     %% Styles
@@ -118,8 +115,6 @@ Enterprise-Microsoft-Defender-XDR-Lab
 | **Human Resources** | Emma Wilson | `SP-SOC-LAB-TIER-01-HR` | 🟢 Active / Onboarded |
 | **Sales** | Anna Becker | `SP-SOC-LAB-TIER-01-SALES` | 🟢 Active / Onboarded |
 | **CEO** | Michael Weber | `SP-SOC-LAB-TIER-01-CEO` | 🟢 Active / Onboarded |
-| **Finance** | John Schneider | `FIN-LAPTOP-01` | ⏳ Planned |
-| **IT Administration** | Alex Müller | `MGMT-WORKSTATION` | ⏳ Planned |
 | **Security Operations** | Sachin Patil | `SOC-ANALYST-01` | 💻 Defender Portal Access |
 
 ---
@@ -150,14 +145,6 @@ Enterprise-Microsoft-Defender-XDR-Lab
 * 🚨 **Tier-1 Escalation:** Escalated suspicious multi-stage activity for deeper Tier-2 validation.
 * 📝 **Incident Documentation:** Documented investigation findings, evidence, analyst decisions, and incident lifecycles.
 
-### 🚧 Planned
-
-* ⚔️ Controlled LOLBin simulations
-* 🌐 Additional network IOC investigation
-* 🔁 Persistence and scheduled-task analysis
-* ☁️ Microsoft Sentinel integration
-
-
 ---
 
 ## ⚔️ MITRE ATT&CK Coverage
@@ -170,10 +157,6 @@ The following MITRE ATT&CK techniques were validated through controlled simulati
 | ✅ | **T1566 – Phishing** | Credential-phishing simulation, user interaction, alert triage, and incident investigation |
 | ✅ | **T1033 – System Owner/User Discovery** | User-context discovery using `whoami` |
 | ✅ | **T1016 – System Network Configuration Discovery** | Network configuration discovery activity investigated |
-| 🚧 | **T1218 – Signed Binary Proxy Execution** | Planned LOLBin simulation using trusted Windows binaries |
-| 🚧 | **T1105 – Ingress Tool Transfer** | Planned controlled file-transfer investigation |
-| 🚧 | **T1053.005 – Scheduled Task/Job** | Planned persistence simulation |
-| 🚧 | **T1562.001 – Impair Defenses** | Planned Defender-tampering investigation |
 
 > MITRE ATT&CK mappings are documented only when the corresponding behavior has been generated, observed, and investigated in the lab.
 
