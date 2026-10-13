@@ -1,5 +1,5 @@
 
-# 🛡️ Enterprise-Microsoft-Defender-XDR-Lab
+# 🛡️ E5 Enterprise-Microsoft-Defender-XDR-Lab
 
 ## 📌 Project Overview
 
